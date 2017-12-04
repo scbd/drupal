@@ -10,7 +10,7 @@ COPY package.json ./
 
 RUN npm install -q --only=prod
 
-COPY . ./
+COPY ./ /
 COPY /scripts/* /
 
 ENTRYPOINT ["/docker-entry.sh"]
