@@ -11,6 +11,7 @@ COPY package.json ./
 RUN npm install -q --only=prod
 
 COPY . ./
+COPY /scripts/* /
 
-ENTRYPOINT ["scripts/docker-entry.sh"]
-CMD ["scripts/docker-cmd.sh"]
+ENTRYPOINT ["/docker-entry.sh"]
+CMD ["/docker-cmd.sh"]
