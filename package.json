@@ -1,0 +1,23 @@
+{
+  "name": "drupal-cron-scripts",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+        "amqplib": "0.4.2",
+        "winston": "2.2.0"
+  },
+  "engines": {
+    "node": ">=8.4"
+  },
+  "scripts": {
+    "start": "node server"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
