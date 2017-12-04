@@ -13,5 +13,6 @@ RUN npm install -q --only=prod
 COPY ./ /
 COPY /scripts/* /
 
+RUN ["chmod", "+x", "/init.sh"]
 ENTRYPOINT ["/init.sh"]
 CMD ["/docker-cmd.sh"]
