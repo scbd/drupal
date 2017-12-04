@@ -1,5 +1,5 @@
 const amqp = require('amqplib')
-const config = require('../server-config').amq
+const config = {url:'amqp://localhost:5672'}
 const logger = require('./logger')
 
 module.exports = exports = class Amq {
@@ -30,7 +30,7 @@ module.exports = exports = class Amq {
   // ============================================================
   //
   // ============================================================
-  async createChannel () {
+  static async createChannel () {
     let connection = await this.connect()
     let channel = await connection.createChannel()
 
@@ -40,7 +40,7 @@ module.exports = exports = class Amq {
   // ============================================================
   //
   // ============================================================
-  async assertExchange (exchange, type, options) {
+  static async assertExchange (exchange, type, options) {
     let channel = await this.createChannel()
 
     await channel.assertExchange(exchange, type, options)
@@ -50,7 +50,7 @@ module.exports = exports = class Amq {
   // ============================================================
   //
   // ============================================================
-  async assertQueue (queue, options) {
+  static async assertQueue (queue, options) {
     let channel = await this.createChannel()
 
     await channel.assertQueue(queue, options)
@@ -60,7 +60,7 @@ module.exports = exports = class Amq {
   // ============================================================
   //
   // ============================================================
-  async bindQueue (queue, exchange, routingKey, userArguments) {
+  static async bindQueue (queue, exchange, routingKey, userArguments) {
     let channel = await this.createChannel()
 
     await channel.bindQueue(queue, exchange, routingKey, userArguments)
@@ -70,7 +70,7 @@ module.exports = exports = class Amq {
   // ============================================================
   //
   // ============================================================
-  async consume (queue, callback) {
+  static async consume (queue, callback) {
     let channel = await this.createChannel()
 
     channel.prefetch(1)
@@ -98,7 +98,7 @@ module.exports = exports = class Amq {
   // ============================================================
   //
   // ============================================================
-  async publish (exchange, routingKey, content, options) {
+  static async publish (exchange, routingKey, content, options) {
     if (!Amq.GLOBALCHANNEL)
       Amq.GLOBALCHANNEL = await this.createChannel()
 

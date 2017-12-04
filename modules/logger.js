@@ -41,13 +41,7 @@ class LoggerConnectionManager {
     //
     // ============================================================
     static warn (msg, ...meta) {
-        const slack = require('../workers/libs/slack-error-notification')
-        if (slackOnWarn) {
-            let slackMsg = msg
-            if (meta && meta.length)
-                slackMsg = slackMsg + '\n```' + util.format(meta) + '```'
-            slack.warn(slackMsg)
-        }
+    
 
         return LoggerConnectionManager.GLOBAL_LOGGER.warn(msg, ...meta)
     }
@@ -56,13 +50,6 @@ class LoggerConnectionManager {
     //
     // ============================================================
     static error (msg, ...meta) {
-        const slack = require('../workers/libs/slack-error-notification')
-        if (slackOnError) {
-            let slackMsg = msg
-            if (meta && meta.length)
-                slackMsg = slackMsg + '\n```' + util.format(meta) + '```'
-            slack.error(slackMsg)
-        }
 
         return LoggerConnectionManager.GLOBAL_LOGGER.error(msg, ...meta)
     }

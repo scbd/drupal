@@ -9,6 +9,7 @@ async function init () {
     // Connect to RabbitMQ (terminate process on failure)
     await testConnection ()
     logger.error(args);
+    queueNotification(args[0], {env:args[1]})
 }
 
 async function testConnection () {
@@ -32,12 +33,13 @@ async function testConnection () {
 async function queueNotification(routingKey, data) {
 
   try {
-      amq.publish('amq.topic', routingKey, data);
+      let response = await amq.publish('amq.topic', routingKey, data);
+      logger.error(response)
   } catch (error) {
-      logger.error('[FATAL] Failed to establish initial connection with RabbitMQ. Exiting in 5 seconds...')
+      logger.error('[FATAL] Failed to to send message to RabbitMQ. Exiting in 5 seconds...')
       logger.error(error)
       await setTimeout(() => {}, 5000)
       process.exit(-1)
   }
-    return yield
+    return true
 }
